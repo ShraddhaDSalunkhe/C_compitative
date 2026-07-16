@@ -1,3 +1,5 @@
+//Accept number from user and check whether it is divisible by 5 or not
+
 #include<stdio.h>
 typedef int BOOL;
 #define TRUE 1
