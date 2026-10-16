@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+int isPresent(int arr[], int n, int value)
+{
+    int i;
+
+    for(i = 0; i < n; i++)
+    {
+        if(arr[i] == value)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+int main()
+{
+    int arr[100];
+    int n, i, j;
+    int currentLength, maxLength = 0;
+    int start, current;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter elements:\n");
+
+    for(i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    for(i = 0; i < n; i++)
+    {
+        /* Check if this is the beginning of a sequence */
+        if(!isPresent(arr, n, arr[i] - 1))
+        {
+            current = arr[i];
+            currentLength = 1;
+
+            while(isPresent(arr, n, current + 1))
+            {
+                current++;
+                currentLength++;
+            }
+
+            if(currentLength > maxLength)
+            {
+                maxLength = currentLength;
+                start = arr[i];
+            }
+        }
+    }
+
+    printf("\nLongest consecutive sequence:\n");
+
+    for(j = 0; j < maxLength; j++)
+    {
+        printf("%d ", start + j);
+    }
+
+    printf("\nLength = %d\n", maxLength);
+
+    return 0;
+}
