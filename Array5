@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+int main(void)
+{
+    int arr[100];
+    int n, i;
+    int candidate, count = 0;
+    int frequency = 0;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > 100)
+    {
+        printf("Please enter a number from 1 to 100.\n");
+        return 1;
+    }
+
+    printf("Enter elements:\n");
+
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    /* Find a possible majority candidate */
+    for (i = 0; i < n; i++)
+    {
+        if (count == 0)
+        {
+            candidate = arr[i];
+            count = 1;
+        }
+        else if (arr[i] == candidate)
+        {
+            count++;
+        }
+        else
+        {
+            count--;
+        }
+    }
+
+    /* Verify the candidate */
+    for (i = 0; i < n; i++)
+    {
+        if (arr[i] == candidate)
+        {
+            frequency++;
+        }
+    }
+
+    if (frequency > n / 2)
+    {
+        printf("Majority element = %d\n", candidate);
+        printf("Frequency = %d\n", frequency);
+    }
+    else
+    {
+        printf("Majority element does not exist.\n");
+    }
+
+    return 0;
+}
